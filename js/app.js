@@ -1,7 +1,7 @@
 getPopulationByYearAndCountry(2010, 'United States')
   .then(populationData => drawLineChart('#chart', populationData, 0))
   .catch(catchErr);
-//
+
 getPopulationByAgeGroupAndCountry(25, 'United States')
   .then(populationData => drawLineChart('#chart2', populationData, 1950))
   .catch(catchErr);
