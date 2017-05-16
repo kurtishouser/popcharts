@@ -38,74 +38,76 @@
 
       <h1 class="uk-heading-primary">World Population</h1>
 
-      <div class="uk-card uk-card-default uk-card-body uk-card-hover uk-margin-bottom">
-        <h3 class="uk-card-title">By age for a given year and country</h3>
-        <div id="chart"><img src="images/world.gif"></div>
-        <form id="age-graph-form" class="uk-margin">
-          <select name="country" class="uk-select uk-form-width-medium uk-form-small">
-            <option>Argentina</option>
-            <option>Austria</option>
-            <option>China</option>
-            <option>Estonia</option>
-            <option>Germany</option>
-            <option>Indonesia</option>
-            <option>Japan</option>
-            <option>Saudi Arabia</option>
-            <option>United States</option>
-            <option>Zimbabwe</option>
-          </select>
-          <select name="year" class="uk-select uk-form-width-medium uk-form-small">
-            <option>1950</option>
-            <option>1960</option>
-            <option>1970</option>
-            <option>1980</option>
-            <option>1990</option>
-            <option>2000</option>
-            <option>2010</option>
-          </select>
-          <!-- <div class="uk-form-controls uk-form-controls-text">
-            <label><input class="uk-radio" type="radio" name="males">Males</label>
-            <label><input class="uk-radio" type="radio" name="females">Females</label>
-            <label><input class="uk-radio" type="radio" name="total">Total</label>
-          </div> -->
-          <button class="uk-button uk-button-small uk-button-primary" type="submit">Update</button>
-        </form>
+      <div class="uk-grid-small">
+
+        <div class="uk-child-width-expandx">
+          <div class="uk-card uk-card-default uk-card-body uk-card-hover uk-margin-bottom">
+            <h3 class="uk-card-title">By age for a given year and country</h3>
+            <div id="age-chart"><img src="images/world.gif"></div>
+            <form id="age-chart-form" class="uk-margin">
+              <select id="age-chart-year" name="year" class="uk-select uk-form-width-medium uk-form-small">
+                <option>1950</option>
+                <option>1960</option>
+                <option>1970</option>
+                <option>1980</option>
+                <option>1990</option>
+                <option>2000</option>
+                <option>2010</option>
+              </select>
+              <select id="age-chart-country" name="country" class="uk-select uk-form-width-medium uk-form-small">
+                <option>Argentina</option>
+                <option>Austria</option>
+                <option>China</option>
+                <option>Estonia</option>
+                <option>Germany</option>
+                <option>Indonesia</option>
+                <option>Japan</option>
+                <option>Saudi Arabia</option>
+                <option>United States</option>
+                <option>Zimbabwe</option>
+              </select>
+              <button class="uk-button uk-button-small uk-button-primary" type="submit">Update</button>
+            </form>
+          </div>
+        </div>
+
+        <div class="uk-child-width-expandx">
+          <div class="uk-card uk-card-default uk-card-body uk-card-hover">
+            <h3 class="uk-card-title">By year for a given age group and country</h3>
+            <div id="year-chart"><img src="images/world.gif"></div>
+            <form id="year-chart-form" class="uk-margin">
+              <select id="year-chart-age" name="age" class="uk-select uk-form-width-medium uk-form-small">
+                <option>0</option>
+                <option>10</option>
+                <option>20</option>
+                <option>30</option>
+                <option>40</option>
+                <option>50</option>
+                <option>60</option>
+                <option>70</option>
+                <option>80</option>
+                <option>90</option>
+                <option>100</option>
+              </select>
+              <select id="year-chart-country" name="country" class="uk-select uk-form-width-medium uk-form-small">
+                <option>Argentina</option>
+                <option>Austria</option>
+                <option>China</option>
+                <option>Estonia</option>
+                <option>Germany</option>
+                <option>Indonesia</option>
+                <option>Japan</option>
+                <option>Saudi Arabia</option>
+                <option>United States</option>
+                <option>Zimbabwe</option>
+              </select>
+              <button class="uk-button uk-button-small uk-button-primary" type="submit">Update</button>
+            </form>
+          </div>
+        </div>
+
+
       </div>
-
-      <div class="uk-card uk-card-default uk-card-body uk-card-hover">
-        <h3 class="uk-card-title">By year for a given age group and country</h3>
-        <div id="chart2"><img src="images/world.gif"></div>
-        <form id="year-graph-form" class="uk-margin">
-          <select name="age" class="uk-select uk-form-width-medium uk-form-small">
-            <option>0</option>
-            <option>10</option>
-            <option>20</option>
-            <option>30</option>
-            <option>40</option>
-            <option>50</option>
-            <option>60</option>
-            <option>70</option>
-            <option>80</option>
-            <option>90</option>
-            <option>100</option>
-          </select>
-          <select name="country" class="uk-select uk-form-width-medium uk-form-small">
-            <option>Argentina</option>
-            <option>Austria</option>
-            <option>China</option>
-            <option>Estonia</option>
-            <option>Germany</option>
-            <option>Indonesia</option>
-            <option>Japan</option>
-            <option>Saudi Arabia</option>
-            <option>United States</option>
-            <option>Zimbabwe</option>
-          </select>
-          <button class="uk-button uk-button-small uk-button-primary" type="submit">Update</button>
-        </form>
-      </div>
-
-
     </div>
   </div>
 
