@@ -19,8 +19,8 @@ function getPopulationByYearAndCountry(year, country) {
   return getJsonFromFetch(url)
     .then(populationTable => {
         let columnValues = [];
-        let males = ['Males - ' + year + ' - ' + country];
-        let females = ['Females - ' + year + ' - ' + country];
+        let males = ['M - ' + year + ' - ' + country];
+        let females = ['F - ' + year + ' - ' + country];
         let total = ['Total - ' + year + ' - ' + country];
 
         populationTable.filter(item => item.year <= 2025) // predicts thru 2100 otherwise!
@@ -43,8 +43,8 @@ function getPopulationByAgeGroupAndCountry(age, country) {
   return getJsonFromFetch(url)
     .then(populationTable => {
         let columnValues = [];
-        let males = ['Males - ' +  age + ' yrs - ' + country];
-        let females = ['Females - ' +  age + ' yrs - ' + country];
+        let males = ['M - ' +  age + ' yrs - ' + country];
+        let females = ['F - ' +  age + ' yrs - ' + country];
         let total = ['Total - ' +  age + ' yrs - ' + country];
 
         populationTable.filter(item => item.year <= 2025) // predicts thru 2100 otherwise
@@ -83,11 +83,11 @@ function logAndContinue(value) {
 }
 
 /* ----- PRESENTATIONAL - move to separate file ----- */
-function drawLineChart(domId, columnValues, xAxisStartTick) {
+function drawLineChart(domId, data, xAxisStartTick) {
   var chart = c3.generate({
     bindto: domId,
     data: {
-      columns: columnValues
+      columns: data
     },
     axis: {
       x: {
@@ -125,11 +125,9 @@ $("#age-chart-form").on("submit", function() {
 });
 
 $("#year-chart-form").on("submit", function() {
-  console.log('submitted');
   let age = $('#year-chart-age').val();
   let country = $('#year-chart-country').val();
   getPopulationByAgeGroupAndCountry(age, country)
-    .then(logAndContinue)
     .then(populationData => drawLineChart('#year-chart', populationData, 1950))
     .catch(catchErr);
   return false;

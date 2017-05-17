@@ -6,8 +6,9 @@
   <title>World Population</title>
 
   <!-- Load CSS -->
-  <link rel="stylesheet" href="css/uikit.min.css" />
+  <link rel="stylesheet" href="css/uikit.min.css">
   <link rel="stylesheet" href="css/c3.min.css">
+  <link rel="stylesheet" href="css/app.css">
 
   <!-- Load JS -->
   <script src="js/jquery.min.js"></script>
@@ -33,26 +34,36 @@
     </div>
   </nav>
 
-  <div class="uk-section">
-    <div class="uk-container">
+  <div class="uk-section uk-section-small">
+
+    <div class="uk-container uk-container-large">
 
       <h1 class="uk-heading-primary">World Population</h1>
 
-      <div class="uk-grid-small">
+      <div class="uk-grid-small" uk-grid>
 
-        <div class="uk-child-width-expandx">
+        <div class="uk-width-1-2@m">
           <div class="uk-card uk-card-default uk-card-body uk-card-hover uk-margin-bottom">
             <h3 class="uk-card-title">By age for a given year and country</h3>
-            <div id="age-chart"><img src="images/world.gif"></div>
+            <div id="age-chart" class="chart-content"><img src="images/graph-placeholder.jpg"></div>
             <form id="age-chart-form" class="uk-margin">
               <select id="age-chart-year" name="year" class="uk-select uk-form-width-medium uk-form-small">
                 <option>1950</option>
+                <option>1955</option>
                 <option>1960</option>
+                <option>1965</option>
                 <option>1970</option>
+                <option>1975</option>
                 <option>1980</option>
+                <option>1985</option>
                 <option>1990</option>
+                <option>1995</option>
                 <option>2000</option>
+                <option>2005</option>
                 <option>2010</option>
+                <option>2015</option>
+                <option>2020</option>
+                <option>2025</option>
               </select>
               <select id="age-chart-country" name="country" class="uk-select uk-form-width-medium uk-form-small">
                 <option>Argentina</option>
@@ -71,22 +82,32 @@
           </div>
         </div>
 
-        <div class="uk-child-width-expandx">
-          <div class="uk-card uk-card-default uk-card-body uk-card-hover">
+        <div class="uk-width-1-2@m">
+          <div class="uk-card uk-card-default uk-card-body uk-card-hover uk-margin-bottom">
             <h3 class="uk-card-title">By year for a given age group and country</h3>
-            <div id="year-chart"><img src="images/world.gif"></div>
+            <div id="year-chart" class="chart-content"><img src="images/graph-placeholder.jpg"></div>
             <form id="year-chart-form" class="uk-margin">
               <select id="year-chart-age" name="age" class="uk-select uk-form-width-medium uk-form-small">
                 <option>0</option>
+                <option>5</option>
                 <option>10</option>
+                <option>15</option>
                 <option>20</option>
+                <option>25</option>
                 <option>30</option>
+                <option>35</option>
                 <option>40</option>
+                <option>45</option>
                 <option>50</option>
+                <option>55</option>
                 <option>60</option>
+                <option>65</option>
                 <option>70</option>
+                <option>75</option>
                 <option>80</option>
+                <option>85</option>
                 <option>90</option>
+                <option>95</option>
                 <option>100</option>
               </select>
               <select id="year-chart-country" name="country" class="uk-select uk-form-width-medium uk-form-small">
@@ -106,10 +127,11 @@
           </div>
         </div>
 
+      </div> <!-- END - .uk-grid-small -->
 
-      </div>
-    </div>
-  </div>
+    </div> <!-- END - .uk-container -->
+
+  </div> <!-- END - .uk-section -->
 
   <script src="js/app.js"></script>
 </body>
