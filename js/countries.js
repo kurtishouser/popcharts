@@ -232,7 +232,7 @@ const countries = [
   // "Western Asia",
   // "Western Europe",
   // "Western Sahara",
-  "World",
+  // "World",
   "Zambia",
   "Zimbabwe"
-]
+];

@@ -22,7 +22,8 @@
 
   <nav class="uk-navbar-container" uk-navbar>
     <div class="uk-navbar-left">
-      <ul class="uk-navbar-nav">
+      <a href="index.html" class="uk-navbar-item uk-logo">World Polulation</a>
+      <!-- <ul class="uk-navbar-nav">
         <li class="uk-active"><a href="">World Population</a></li>
         <li class="uk-parent">
           <a href=""></a>
@@ -30,13 +31,13 @@
         <li>
           <a href=""></a>
         </li>
-      </ul>
+      </ul> -->
     </div>
   </nav>
 
   <div class="uk-section uk-section-small">
 
-    <div class="uk-container uk-container-large">
+    <div class="uk-container uk-container-medium">
 
       <h1 class="uk-heading-primary">World Population</h1>
 
@@ -44,10 +45,10 @@
 
         <div class="uk-width-1-2@m">
           <div class="uk-card uk-card-default uk-card-body uk-card-hover uk-margin-bottom">
-            <h3 class="uk-card-title">By age for a given year and country</h3>
+            <h3 class="uk-card-title">By age for a given year and country / region</h3>
             <div id="age-chart" class="chart-content"><img src="images/graph-placeholder.jpg"></div>
             <form id="age-chart-form" class="uk-margin">
-              <select id="age-chart-year" name="year" class="uk-select uk-form-width-medium uk-form-small">
+              <select id="age-chart-year" name="year" class="uk-select uk-form-width-xsmall uk-form-small">
                 <option>1950</option>
                 <option>1955</option>
                 <option>1960</option>
@@ -61,11 +62,12 @@
                 <option>2000</option>
                 <option>2005</option>
                 <option>2010</option>
-                <option>2015</option>
+                <option selected>2015</option>
                 <option>2020</option>
                 <option>2025</option>
               </select>
               <select id="age-chart-country" name="country" class="uk-select uk-form-width-medium uk-form-small">
+                <option disabled="true">Countries...</option>
                 <option>Argentina</option>
                 <option>Austria</option>
                 <option>China</option>
@@ -74,8 +76,16 @@
                 <option>Indonesia</option>
                 <option>Japan</option>
                 <option>Saudi Arabia</option>
-                <option>United States</option>
+                <option selected>United States</option>
                 <option>Zimbabwe</option>
+                <option disabled="true">Regions...</option>
+                <option>AFRICA</option>
+                <option>ASIA</option>
+                <option>Central America</option>
+                <option>EUROPE</option>
+                <option>NORTHERN AMERICA</option>
+                <option>OCEANIA</option>
+                <option>World</option>
               </select>
               <button class="uk-button uk-button-small uk-button-primary" type="submit">Update</button>
             </form>
@@ -84,10 +94,64 @@
 
         <div class="uk-width-1-2@m">
           <div class="uk-card uk-card-default uk-card-body uk-card-hover uk-margin-bottom">
-            <h3 class="uk-card-title">By year for a given age group and country</h3>
+            <h3 class="uk-card-title">By year for a given age group and country / region</h3>
             <div id="year-chart" class="chart-content"><img src="images/graph-placeholder.jpg"></div>
             <form id="year-chart-form" class="uk-margin">
-              <select id="year-chart-age" name="age" class="uk-select uk-form-width-medium uk-form-small">
+              <select id="year-chart-age" name="age" class="uk-select uk-form-width-xsmall uk-form-small">
+                <option>0</option>
+                <option>5</option>
+                <option>10</option>
+                <option>15</option>
+                <option>20</option>
+                <option>25</option>
+                <option selected>30</option>
+                <option>35</option>
+                <option>40</option>
+                <option>45</option>
+                <option>50</option>
+                <option>55</option>
+                <option>60</option>
+                <option>65</option>
+                <option>70</option>
+                <option>75</option>
+                <option>80</option>
+                <option>85</option>
+                <option>90</option>
+                <option>95</option>
+                <option>100</option>
+              </select>
+              <select id="year-chart-country" name="country" class="uk-select uk-form-width-medium uk-form-small">
+                <option disabled="true">Countries...</option>
+                <option>Argentina</option>
+                <option>Austria</option>
+                <option>China</option>
+                <option>Estonia</option>
+                <option>Germany</option>
+                <option>Indonesia</option>
+                <option>Japan</option>
+                <option>Saudi Arabia</option>
+                <option selected>United States</option>
+                <option>Zimbabwe</option>
+                <option disabled="true">Regions...</option>
+                <option>AFRICA</option>
+                <option>ASIA</option>
+                <option>Central America</option>
+                <option>EUROPE</option>
+                <option>NORTHERN AMERICA</option>
+                <option>OCEANIA</option>
+                <option>World</option>
+              </select>
+              <button class="uk-button uk-button-small uk-button-primary" type="submit">Update</button>
+            </form>
+          </div>
+        </div>
+
+        <div class="uk-width-1-1">
+          <div class="uk-card uk-card-default uk-card-body uk-card-hover uk-margin-bottom">
+            <h3 class="uk-card-title">By country / region for a given age group and year</h3>
+            <div id="country-chart" class="chart-content"><img src="images/graph-placeholder.jpg"></div>
+            <form id="country-chart-form" class="uk-margin">
+              <select id="country-chart-age" name="age" class="uk-select uk-form-width-xsmall uk-form-small">
                 <option>0</option>
                 <option>5</option>
                 <option>10</option>
@@ -110,22 +174,80 @@
                 <option>95</option>
                 <option>100</option>
               </select>
-              <select id="year-chart-country" name="country" class="uk-select uk-form-width-medium uk-form-small">
-                <option>Argentina</option>
-                <option>Austria</option>
-                <option>China</option>
-                <option>Estonia</option>
-                <option>Germany</option>
-                <option>Indonesia</option>
-                <option>Japan</option>
-                <option>Saudi Arabia</option>
-                <option>United States</option>
-                <option>Zimbabwe</option>
+              <select id="country-chart-year" name="year" class="uk-select uk-form-width-xsmall uk-form-small">
+                <option>1950</option>
+                <option>1955</option>
+                <option>1960</option>
+                <option>1965</option>
+                <option>1970</option>
+                <option>1975</option>
+                <option>1980</option>
+                <option>1985</option>
+                <option>1990</option>
+                <option>1995</option>
+                <option>2000</option>
+                <option>2005</option>
+                <option>2010</option>
+                <option>2015</option>
+                <option>2020</option>
+                <option>2025</option>
               </select>
               <button class="uk-button uk-button-small uk-button-primary" type="submit">Update</button>
             </form>
           </div>
         </div>
+
+        <div class="uk-width-1-1">
+          <div class="uk-card uk-card-default uk-card-body uk-card-hover uk-margin-bottom">
+            <h3 class="uk-card-title">Life Expectancy by Country</h3>
+            <div id="life-expectancy-chart" class="chart-content"><img src="images/graph-placeholder.jpg"></div>
+            <form id="life-expectancy-chart-form" class="uk-margin">
+              <select id="life-expectancy-age" name="age" class="uk-select uk-form-width-xsmall uk-form-small">
+                <option>0</option>
+                <option>5</option>
+                <option>10</option>
+                <option>15</option>
+                <option>20</option>
+                <option>25</option>
+                <option>30</option>
+                <option>35</option>
+                <option>40</option>
+                <option>45</option>
+                <option>50</option>
+                <option>55</option>
+                <option>60</option>
+                <option>65</option>
+                <option>70</option>
+                <option>75</option>
+                <option>80</option>
+                <option>85</option>
+                <option>90</option>
+                <option>95</option>
+                <option>100</option>
+              </select>
+              <select id="life-expectancy-chart-year" name="year" class="uk-select uk-form-width-xsmall uk-form-small">
+                <option>1950</option>
+                <option>1955</option>
+                <option>1960</option>
+                <option>1965</option>
+                <option>1970</option>
+                <option>1975</option>
+                <option>1980</option>
+                <option>1985</option>
+                <option>1990</option>
+                <option>1995</option>
+                <option>2000</option>
+                <option>2005</option>
+                <option>2010</option>
+                <option>2015</option>
+                <option>2020</option>
+                <option>2025</option>
+              </select>
+              <button class="uk-button uk-button-small uk-button-primary" type="submit">Update</button>
+            </form>
+          </div>
+        </div>
+
 
       </div> <!-- END - .uk-grid-small -->
 
