@@ -237,6 +237,49 @@ const countries = [
   "Zimbabwe"
 ];
 
+const regions = [
+  "China",
+  "India",
+  "AFRICA",
+  "ASIA",
+  "Australia/New Zealand",
+  "The Bahamas",
+  "Caribbean",
+  "Central America",
+  "Central Asia",
+  "Eastern Africa",
+  "Eastern Asia",
+  "Eastern Europe",
+  "EUROPE",
+  "LATIN AMERICA AND THE CARIBBEAN",
+  "Least developed countries",
+  "Less developed regions",
+  "Less developed regions, excluding China",
+  "Less developed regions, excluding least developed countries",
+  "Melanesia",
+  "Micronesia",
+  "Middle Africa",
+  "More developed regions",
+  "Northern Africa",
+  "NORTHERN AMERICA",
+  "Northern Europe",
+  "OCEANIA",
+  "Other non-specified areas",
+  "Polynesia",
+  "South America",
+  "South-Central Asia",
+  "South-Eastern Asia",
+  "Southern Africa",
+  "Southern Asia",
+  "Southern Europe",
+  "Sub-Saharan Africa",
+  "Western Africa",
+  "Western Asia",
+  "Western Europe",
+  "Western Sahara",
+  "World",
+];
+
 /* --- uncomment these to start with populated graphs --- */
 // getPopulationByYearAndCountry(2010, 'United States')
 //   .then(populationData => drawLineChart('#year-chart', populationData, 0))
@@ -288,7 +331,7 @@ function getPopulationByAgeGroupAndCountry(age, country) {
         let females = ['F - ' +  age + ' yrs - ' + country];
         let total = ['Total - ' +  age + ' yrs - ' + country];
 
-        populationTable.filter(item => item.year <= 2025) // predicts thru 2100 otherwise
+        populationTable.filter(item => item.year <= 2025) // limit dataset, predicts thru 2100 otherwise!
           .forEach(item => {
             males.push(item.males);
             females.push(item.females);
@@ -339,21 +382,9 @@ function getTotalLifeExpectancyAllCountries(sex, country, dob) {
       return a.total_life_expectancy - b.total_life_expectancy;
     })
   })
-  // .then(logAndContinue)
-  // .then(lifeExpectancies => {
-  //   let totalLifeExpectancy = lifeExpectancies.map(lifeExpectancy => {
-  //     // life.country = lifeExpectancy.country;
-  //     // life.lifeExpectancy.total_life_expectancy;
-  //     return lifeExpectancy.total_life_expectancy;
-  //   })
-  //   totalLifeExpectancy.unshift('Life Expectancy')
-  //   return totalLifeExpectancy;
-  // })
-  // .then(logAndContinue)
-
 }
 
-// NOT USED - Calculate total life expectancy - individual country
+// NOT USED (yet) - Calculate total life expectancy - individual country
 function getTotalLifeExpectancyIndividual(sex, country, dob) {
   let url = `http://api.population.io/1.0/life-expectancy/total/${sex}/${country}/${dob}/`
   return getJsonFromFetch(url)
@@ -414,7 +445,7 @@ function drawLineChart(domId, chartData, xAxisStartTick, xAxisLabel) {
 }
 
 function drawCountryBarChart(domId, data) {
-  console.log(data);
+  // put the data into the correct data format
   let xAxis = ['x'];
   let males = ['Male'];
   let females = ['Female'];
@@ -425,8 +456,9 @@ function drawCountryBarChart(domId, data) {
     females.push(item.females);
     total.push(item.total);
   });
+
+  // draw the chart
   chartData = [xAxis, males, females, total];
-  console.log(chartData);
   var chart = c3.generate({
     bindto: domId,
     size: {
@@ -451,58 +483,26 @@ function drawCountryBarChart(domId, data) {
       enabled: true
     }
   });
-  // var chart = c3.generate({
-  //   bindto: domId,
-  //   size: {
-  //       height: 400
-  //   },
-  //   data: {
-  //     columns: data,
-  //     type: 'bar'
-  //   },
-  //   bar: {
-  //       width: {
-  //           ratio: 10 // this makes bar width 50% of length between ticks
-  //       }
-  //       // or
-  //       //width: 100 // this makes bar width 100px
-  //   },
-  //   axis: {
-  //     x: {
-  //       tick: {
-  //         format: function (x) { return x + xAxisStartTick; }
-  //       }
-  //     },
-  //     y: {
-  //       label: { // ADD
-  //         text: 'Population',
-  //         position: 'outer-middle'
-  //       }
-  //     },
-  //     rotated: true
-  //   },
-  //   point: {
-  //       show: false
-  //   },
-  //   zoom: {
-  //       enabled: true
-  //   },
-  //   tooltip: {
-  //       grouped: true // Default true
-  //   }
-  // });
+
 }
 
-function drawLifeExpectancyBarChart(domId, data) {
-  // put the data in to the correct data format
+function drawLifeExpectancyBarChart(domId, data, country) {
+  // convert data to appropriate format for the chart
   let xAxis = ['x'];
+  let you = ['You'];
   let lifeExpectancy = ['Life Expectancy'];
   data.forEach(item => {
     xAxis.push(item.country);
+    if (item.country === country) {
+      you.push(item.total_life_expectancy);
+    } else {
+      you.push(0);
+    }
     lifeExpectancy.push(item.total_life_expectancy);
   });
-  // console.log(xAxis, xAxis.length);
-  // console.log(lifeExpectancy, lifeExpectancy.length);
+  chartData = [xAxis, lifeExpectancy, you];
+
+  // draw the chart
   var chart = c3.generate({
     bindto: domId,
     size: {
@@ -510,10 +510,7 @@ function drawLifeExpectancyBarChart(domId, data) {
     },
     data: {
       x: 'x',
-      columns: [
-        xAxis,
-        lifeExpectancy,
-      ],
+      columns: chartData,
       type: 'bar'
     },
     axis: {
@@ -556,6 +553,9 @@ $("#country-chart-form").on("submit", function() {
   let age = $('#country-chart-age').val();
   let year = $('#country-chart-year').val();
   getPopulationByAgeGroupAndYear(age, year)
+    .then(populationData => {
+      return populationData.filter(element => !regions.includes(element.country)) // countries only, exclude regions data
+    })
     .then(populationData => drawCountryBarChart('#country-chart', populationData, 0, 'Country'))
     .catch(catchErr);
   return false;
@@ -569,7 +569,7 @@ $("#life-expectancy-chart-form").on("submit", function() {
   let country = $('#life-expectancy-chart-country').val();
   let dob = year + '-' + month + '-' + day;
   getTotalLifeExpectancyAllCountries(sex, country, dob)
-    .then(totalLifeExpectancy => drawLifeExpectancyBarChart('#life-expectancy-chart', totalLifeExpectancy))
+    .then(totalLifeExpectancy => drawLifeExpectancyBarChart('#life-expectancy-chart', totalLifeExpectancy, country))
     .catch(catchErr);
   return false;
 });
