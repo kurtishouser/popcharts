@@ -278,18 +278,19 @@ const regions = [
   "World",
 ];
 
-const countries_test = [
-  'Argentina',
-  'Austria',
-  'China',
-  'Estonia',
-  'Germany',
-  'Indonesia',
-  'Japan',
-  'Saudi Arabia',
-  'United States',
-  'Zimbabwe'
-];
+// subset for testing Promise.all()
+// const countries_test = [
+//   'Argentina',
+//   'Austria',
+//   'China',
+//   'Estonia',
+//   'Germany',
+//   'Indonesia',
+//   'Japan',
+//   'Saudi Arabia',
+//   'United States',
+//   'Zimbabwe'
+// ];
 
 // uncomment to prepopulate charts after page loads
 // prePopulateCharts();
@@ -330,10 +331,10 @@ function getTotalLifeExpectancyAllCountries(sex, country, dob) {
 }
 
 // NOT USED (yet) - Calculate total life expectancy - individual country
-function getTotalLifeExpectancyIndividual(sex, country, dob) {
-  let url = `http://api.population.io/1.0/life-expectancy/total/${sex}/${country}/${dob}/`
-  return getJsonFromFetch(url)
-}
+// function getTotalLifeExpectancyIndividual(sex, country, dob) {
+//   let url = `http://api.population.io/1.0/life-expectancy/total/${sex}/${country}/${dob}/`
+//   return getJsonFromFetch(url)
+// }
 
 function getJsonFromFetch(url) {
   return fetch(url)
@@ -344,33 +345,33 @@ function catchErr(err) {
   throw new Error(err);
 }
 
-function logAndContinue(value) {
-  console.log(value);
-  return value;
-}
+// function logAndContinue(value) {
+//   console.log(value); // eslint-disable-line
+//   return value;
+// }
 
 // optionally prepopulate all charts, useful for startup
-function prePopulateCharts() {
-  getPopulationByYearAndCountry(2010, 'United States')
-    .then(populationData => drawLineChart('#year-chart', populationData, 0))
-    .catch(catchErr);
-
-  getPopulationByAgeGroupAndCountry(25, 'United States')
-    .then(populationData => drawLineChart('#age-chart', populationData, 1950))
-    .catch(catchErr);
-
-  getPopulationByAgeGroupAndYear(30, 2015)
-    .then(populationData => drawCountryBarChart('#country-chart', populationData))
-    .catch(catchErr);
-
-  getTotalLifeExpectancyAllCountries('male', 'United States', '2000-01-01')
-    .then(totalLifeExpectancy => drawLifeExpectancyBarChart('#life-expectancy-chart', totalLifeExpectancy, 'United States'))
-}
+// function prePopulateCharts() {
+//   getPopulationByYearAndCountry(2010, 'United States')
+//     .then(populationData => drawLineChart('#year-chart', populationData, 0))
+//     .catch(catchErr);
+//
+//   getPopulationByAgeGroupAndCountry(25, 'United States')
+//     .then(populationData => drawLineChart('#age-chart', populationData, 1950))
+//     .catch(catchErr);
+//
+//   getPopulationByAgeGroupAndYear(30, 2015)
+//     .then(populationData => drawCountryBarChart('#country-chart', populationData))
+//     .catch(catchErr);
+//
+//   getTotalLifeExpectancyAllCountries('male', 'United States', '2000-01-01')
+//     .then(totalLifeExpectancy => drawLifeExpectancyBarChart('#life-expectancy-chart', totalLifeExpectancy, 'United States'))
+// }
 
 
 /* ----- PRESENTATIONAL - move to separate file ----- */
 function drawLineChart(domId, chartData, xAxisStartTick, xAxisLabel) {
-  var chart = c3.generate({
+  c3.generate({
     bindto: domId,
     data: {
       columns: chartData,
@@ -406,7 +407,7 @@ function drawLineChart(domId, chartData, xAxisStartTick, xAxisLabel) {
 }
 
 function drawCountryBarChart(domId, data) {
-  var chart = c3.generate({
+  c3.generate({
     bindto: domId,
     size: {
         height: 400
@@ -453,7 +454,7 @@ function drawLifeExpectancyBarChart(domId, data, country) {
     }
   }
 
-  var chart = c3.generate({
+  c3.generate({
     bindto: domId,
     size: {
         height: 400
