@@ -291,21 +291,8 @@ const countries_test = [
   'Zimbabwe'
 ];
 
-/* --- uncomment these to start with populated graphs --- */
-// getPopulationByYearAndCountry(2010, 'United States')
-//   .then(populationData => drawLineChart('#year-chart', populationData, 0))
-//   .catch(catchErr);
-//
-// getPopulationByAgeGroupAndCountry(25, 'United States')
-//   .then(populationData => drawLineChart('#age-chart', populationData, 1950))
-//   .catch(catchErr);
-//
-// getPopulationByAgeGroupAndYear(30, 2015)
-//   .then(populationData => drawCountryBarChart('#country-chart', populationData))
-//   .catch(catchErr);
-//
-// getTotalLifeExpectancyAllCountries('male', 'United States', '2000-01-01')
-//   .then(totalLifeExpectancy => drawLifeExpectancyBarChart('#life-expectancy-chart', totalLifeExpectancy))
+// uncomment to pre populate charts after page loads
+prePopulateCharts();
 
 
 // Retrieve population tables for a given year and country
@@ -415,6 +402,24 @@ function catchErr(err) {
 function logAndContinue(value) {
   console.log(value);
   return value;
+}
+
+// optionaly pre populate all charts, useful for startup
+function prePopulateCharts() {
+getPopulationByYearAndCountry(2010, 'United States')
+  .then(populationData => drawLineChart('#year-chart', populationData, 0))
+  .catch(catchErr);
+
+getPopulationByAgeGroupAndCountry(25, 'United States')
+  .then(populationData => drawLineChart('#age-chart', populationData, 1950))
+  .catch(catchErr);
+
+getPopulationByAgeGroupAndYear(30, 2015)
+  .then(populationData => drawCountryBarChart('#country-chart', populationData))
+  .catch(catchErr);
+
+getTotalLifeExpectancyAllCountries('male', 'United States', '2000-01-01')
+  .then(totalLifeExpectancy => drawLifeExpectancyBarChart('#life-expectancy-chart', totalLifeExpectancy, 'United States'))
 }
 
 
