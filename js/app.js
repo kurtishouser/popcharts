@@ -460,16 +460,16 @@ function drawCountryBarChart(domId, data) {
   let xAxis = ['x'];
   let males = ['Male'];
   let females = ['Female'];
-  let total = ['Total'];
+  // let total = ['Total'];
   data.forEach(item => {
     xAxis.push(item.country);
     males.push(item.males);
     females.push(item.females);
-    total.push(item.total);
+    // total.push(item.total);
   });
 
   // draw the chart
-  chartData = [xAxis, males, females, total];
+  chartData = [xAxis, males, females];
   var chart = c3.generate({
     bindto: domId,
     size: {
@@ -478,7 +478,10 @@ function drawCountryBarChart(domId, data) {
     data: {
       x: 'x',
       columns: chartData,
-      type: 'bar'
+      type: 'bar',
+      groups: [
+        ['Male', 'Female']
+      ]
     },
     axis: {
       x: {
