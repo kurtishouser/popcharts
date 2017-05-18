@@ -316,7 +316,7 @@ function getPopulationByAgeGroupAndYear(age, year) {
 // Calculate total life expectancy - all countries
 function getTotalLifeExpectancyAllCountries(sex, country, dob) {
   let url = `http://api.population.io/1.0/life-expectancy/total/`;
-  let lifeExpectancyRequests = countries_test.map(country => fetch(`${url}${sex}/${country}/${dob}/`))
+  let lifeExpectancyRequests = countries.map(country => fetch(`${url}${sex}/${country}/${dob}/`))
   return Promise.all(lifeExpectancyRequests)
   .then(lifeExpectancyResponses => {
     let lifeExpectancyPromises = lifeExpectancyResponses.map(lifeExpectancyResponse => lifeExpectancyResponse.json()); // array of promises
