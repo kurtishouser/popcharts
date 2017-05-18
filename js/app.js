@@ -291,62 +291,66 @@ const countries_test = [
   'Zimbabwe'
 ];
 
-// uncomment to pre populate charts after page loads
-prePopulateCharts();
+// uncomment to prepopulate charts after page loads
+// prePopulateCharts();
 
 
 // Retrieve population tables for a given year and country
 function getPopulationByYearAndCountry(year, country) {
   let url = `http://api.population.io:80/1.0/population/${year}/${country}/`;
   // let data = getJsonFromFetch(url);
-  return getJsonFromFetch(url)
-    .then(populationTable => {
-        let columnValues = [];
-        let males = ['M - ' + year + ' - ' + country];
-        let females = ['F - ' + year + ' - ' + country];
-        let total = ['Total - ' + year + ' - ' + country];
-
-        populationTable.forEach(item => {
-            males.push(item.males);
-            females.push(item.females);
-            total.push(item.total);
-          });
-
-        columnValues.push(males);
-        columnValues.push(females);
-        columnValues.push(total);
-        return columnValues;
-      });
+  return getJsonFromFetch(url);
+    // REMOVE LATER
+    // .then(populationTable => {
+    //     let columnValues = [];
+    //     let males = ['M - ' + year + ' - ' + country];
+    //     let females = ['F - ' + year + ' - ' + country];
+    //     let total = ['Total - ' + year + ' - ' + country];
+    //
+    //     populationTable.forEach(item => {
+    //         males.push(item.males);
+    //         females.push(item.females);
+    //         total.push(item.total);
+    //       });
+    //
+    //     columnValues.push(males);
+    //     columnValues.push(females);
+    //     columnValues.push(total);
+    //     return columnValues;
+    //   });
 }
 
 // Retrieve population tables for a specific age group in the given country
 function getPopulationByAgeGroupAndCountry(age, country) {
   let url = `http://api.population.io/1.0/population/${country}/${age}/`;
-  return getJsonFromFetch(url)
-    .then(populationTable => {
-        let columnValues = [];
-        let males = ['M - ' +  age + ' yrs - ' + country];
-        let females = ['F - ' +  age + ' yrs - ' + country];
-        let total = ['Total - ' +  age + ' yrs - ' + country];
-
-        populationTable.filter(item => item.year <= 2025) // limit dataset, predicts thru 2100 otherwise!
-          .forEach(item => {
-            males.push(item.males);
-            females.push(item.females);
-            total.push(item.total);
-          });
-
-        columnValues.push(males);
-        columnValues.push(females);
-        columnValues.push(total);
-        return columnValues;
-    })
+  return getJsonFromFetch(url);
+    // REMOVE LATER
+    // .then(populationTable => {
+    //     let columnValues = [];
+    //     let males = ['M - ' +  age + ' yrs - ' + country];
+    //     let females = ['F - ' +  age + ' yrs - ' + country];
+    //     let total = ['Total - ' +  age + ' yrs - ' + country];
+    //
+    //     populationTable.filter(item => item.year <= 2025) // limit dataset, predicts thru 2100 otherwise!
+    //       .forEach(item => {
+    //         males.push(item.males);
+    //         females.push(item.females);
+    //         total.push(item.total);
+    //       });
+    //
+    //     columnValues.push(males);
+    //     columnValues.push(females);
+    //     columnValues.push(total);
+    //     return columnValues;
+    // })
 }
 
 // Retrieve population table for all countries and a specific age group in the given year
 function getPopulationByAgeGroupAndYear(age, year) {
   let url = `http://api.population.io/1.0/population/${year}/aged/${age}/`;
-  return getJsonFromFetch(url)
+  return getJsonFromFetch(url);
+
+    // REMOVE LATER
     // .then(populationTable => {
     //     let columnValues = [];
     //     let males = ['M - ' +  age + ' yrs - ' + year];
@@ -369,7 +373,7 @@ function getPopulationByAgeGroupAndYear(age, year) {
 // Calculate total life expectancy - all countries
 function getTotalLifeExpectancyAllCountries(sex, country, dob) {
   let url = `http://api.population.io/1.0/life-expectancy/total/`;
-  let lifeExpectancyRequests = countries.map(country => fetch(`${url}${sex}/${country}/${dob}/`))
+  let lifeExpectancyRequests = countries_test.map(country => fetch(`${url}${sex}/${country}/${dob}/`))
   return Promise.all(lifeExpectancyRequests)
   .then(lifeExpectancyResponses => {
     let lifeExpectancyPromises = lifeExpectancyResponses.map(lifeExpectancyResponse => lifeExpectancyResponse.json()); // array of promises
@@ -386,11 +390,9 @@ function getTotalLifeExpectancyAllCountries(sex, country, dob) {
 function getTotalLifeExpectancyIndividual(sex, country, dob) {
   let url = `http://api.population.io/1.0/life-expectancy/total/${sex}/${country}/${dob}/`
   return getJsonFromFetch(url)
-    .then(json => json.total_life_expectancy);
 }
 
 function getJsonFromFetch(url) {
-  // console.log('Requesting', url);
   return fetch(url)
     .then(response => response.json());
 }
@@ -404,22 +406,22 @@ function logAndContinue(value) {
   return value;
 }
 
-// optionaly pre populate all charts, useful for startup
+// optionally prepopulate all charts, useful for startup
 function prePopulateCharts() {
-getPopulationByYearAndCountry(2010, 'United States')
-  .then(populationData => drawLineChart('#year-chart', populationData, 0))
-  .catch(catchErr);
+  getPopulationByYearAndCountry(2010, 'United States')
+    .then(populationData => drawLineChart('#year-chart', populationData, 0))
+    .catch(catchErr);
 
-getPopulationByAgeGroupAndCountry(25, 'United States')
-  .then(populationData => drawLineChart('#age-chart', populationData, 1950))
-  .catch(catchErr);
+  getPopulationByAgeGroupAndCountry(25, 'United States')
+    .then(populationData => drawLineChart('#age-chart', populationData, 1950))
+    .catch(catchErr);
 
-getPopulationByAgeGroupAndYear(30, 2015)
-  .then(populationData => drawCountryBarChart('#country-chart', populationData))
-  .catch(catchErr);
+  getPopulationByAgeGroupAndYear(30, 2015)
+    .then(populationData => drawCountryBarChart('#country-chart', populationData))
+    .catch(catchErr);
 
-getTotalLifeExpectancyAllCountries('male', 'United States', '2000-01-01')
-  .then(totalLifeExpectancy => drawLifeExpectancyBarChart('#life-expectancy-chart', totalLifeExpectancy, 'United States'))
+  getTotalLifeExpectancyAllCountries('male', 'United States', '2000-01-01')
+    .then(totalLifeExpectancy => drawLifeExpectancyBarChart('#life-expectancy-chart', totalLifeExpectancy, 'United States'))
 }
 
 
@@ -461,20 +463,21 @@ function drawLineChart(domId, chartData, xAxisStartTick, xAxisLabel) {
 }
 
 function drawCountryBarChart(domId, data) {
-  // put the data into the correct data format
-  let xAxis = ['x'];
-  let males = ['Male'];
-  let females = ['Female'];
-  // let total = ['Total'];
-  data.forEach(item => {
-    xAxis.push(item.country);
-    males.push(item.males);
-    females.push(item.females);
-    // total.push(item.total);
-  });
 
-  // draw the chart
-  chartData = [xAxis, males, females];
+  // TO BE REMOVED
+  // put the data into the correct data format
+  // let xAxis = ['x'];
+  // let males = ['Male'];
+  // let females = ['Female'];
+  // // let total = ['Total'];
+  // data.forEach(item => {
+  //   xAxis.push(item.country);
+  //   males.push(item.males);
+  //   females.push(item.females);
+  //   // total.push(item.total);
+  // });
+  // chartData = [xAxis, males, females];
+
   var chart = c3.generate({
     bindto: domId,
     size: {
@@ -482,7 +485,7 @@ function drawCountryBarChart(domId, data) {
     },
     data: {
       x: 'x',
-      columns: chartData,
+      columns: data,
       type: 'bar',
       groups: [
         ['Male', 'Female']
@@ -508,40 +511,36 @@ function drawCountryBarChart(domId, data) {
       enabled: true,
       rescale: true
     },
-    // may add later
-    // subchart: {
-    //   show: true,
-    //   size: {
-    //     height: 20
-    //   },
-    //   axis: {
-    //     x: {
-    //       show: false
-    //     }
-    //   }
-    // }
   });
 
 }
 
 function drawLifeExpectancyBarChart(domId, data, country) {
-  // generate separate arrays for the chart
-  let xAxis = ['x'];
-  let you = ['You'];
-  let lifeExpectancy = ['Life Expectancy'];
 
   let selectedCountryIndex;
-  for (let i = 0; i < data.length; i++) {
-    xAxis.push(data[i].country);
-    lifeExpectancy.push(data[i].total_life_expectancy);
-    if (data[i].country === country) { // country selected by the user
+  for (var i = 0; i < data[0].length; i++) {
+    if (data[0][i+1] === country) { // country selected by the user
       selectedCountryIndex = i; // set index for changing color of country bar
+      break; // no need to go further once it's found
     }
   }
 
-  chartData = [xAxis, lifeExpectancy, you];
+  // REMOVE LATER
+  // // generate separate arrays for the chart
+  // let xAxis = ['x'];
+  // let you = ['You'];
+  // let lifeExpectancy = ['Life Expectancy'];
+  //
+  // let selectedCountryIndex;
+  // for (let i = 0; i < data.length; i++) {
+  //   xAxis.push(data[i].country);
+  //   lifeExpectancy.push(data[i].total_life_expectancy);
+  //   if (data[i].country === country) { // country selected by the user
+  //     selectedCountryIndex = i; // set index for changing color of country bar
+  //   }
+  // }
+  // chartData = [xAxis, lifeExpectancy, you];
 
-  // draw the chart
   var chart = c3.generate({
     bindto: domId,
     size: {
@@ -549,7 +548,7 @@ function drawLifeExpectancyBarChart(domId, data, country) {
     },
     data: {
       x: 'x',
-      columns: chartData,
+      columns: data,
       type: 'bar',
       color : function (color, d) {
           return d.index === selectedCountryIndex ? "#dd0" : color;
@@ -578,7 +577,24 @@ $("#age-chart-form").on("submit", function() {
   let year = $('#age-chart-year').val();
   let country = $('#age-chart-country').val();
   getPopulationByYearAndCountry(year, country)
-    .then(populationData => drawLineChart('#age-chart', populationData, 0, 'Age'))
+    .then(populationData => {
+        let columnValues = [];
+        let males = ['M - ' + year + ' - ' + country];
+        let females = ['F - ' + year + ' - ' + country];
+        let total = ['Total - ' + year + ' - ' + country];
+
+        populationData.forEach(item => {
+            males.push(item.males);
+            females.push(item.females);
+            total.push(item.total);
+          });
+
+        columnValues.push(males);
+        columnValues.push(females);
+        columnValues.push(total);
+        return columnValues;
+      })
+    .then(chartData => drawLineChart('#age-chart', chartData, 0, 'Age'))
     .catch(catchErr);
   return false;
 });
@@ -587,7 +603,25 @@ $("#year-chart-form").on("submit", function() {
   let age = $('#year-chart-age').val();
   let country = $('#year-chart-country').val();
   getPopulationByAgeGroupAndCountry(age, country)
-    .then(populationData => drawLineChart('#year-chart', populationData, 1950, 'Year'))
+    .then(populationData => {
+        let columnValues = [];
+        let males = ['M - ' +  age + ' yrs - ' + country];
+        let females = ['F - ' +  age + ' yrs - ' + country];
+        let total = ['Total - ' +  age + ' yrs - ' + country];
+
+        populationData.filter(item => item.year <= 2025) // limit dataset, predicts thru 2100 otherwise!
+          .forEach(item => {
+            males.push(item.males);
+            females.push(item.females);
+            total.push(item.total);
+          });
+
+        columnValues.push(males);
+        columnValues.push(females);
+        columnValues.push(total);
+        return columnValues;
+    })
+    .then(chartData => drawLineChart('#year-chart', chartData, 1950, 'Year'))
     .catch(catchErr);
   return false;
 });
@@ -599,7 +633,20 @@ $("#country-chart-form").on("submit", function() {
     .then(populationData => {
       return populationData.filter(element => !regions.includes(element.country)) // countries only, exclude regions data
     })
-    .then(populationData => drawCountryBarChart('#country-chart', populationData, 0, 'Country'))
+    .then(chartData => {
+      let xAxis = ['x'];
+      let males = ['Male'];
+      let females = ['Female'];
+      // let total = ['Total'];
+      chartData.forEach(item => {
+        xAxis.push(item.country);
+        males.push(item.males);
+        females.push(item.females);
+        // total.push(item.total);
+      });
+      return [xAxis, males, females];
+    })
+    .then(chartData => drawCountryBarChart('#country-chart', chartData, 0, 'Country'))
     .catch(catchErr);
   return false;
 });
@@ -612,7 +659,17 @@ $("#life-expectancy-chart-form").on("submit", function() {
   let country = $('#life-expectancy-chart-country').val();
   let dob = year + '-' + month + '-' + day;
   getTotalLifeExpectancyAllCountries(sex, country, dob)
-    .then(totalLifeExpectancy => drawLifeExpectancyBarChart('#life-expectancy-chart', totalLifeExpectancy, country))
+    .then(data => {
+      // generate separate arrays for the chart
+      let xAxis = ['x'];
+      let lifeExpectancy = ['Life Expectancy'];
+      for (let i = 0; i < data.length; i++) {
+        xAxis.push(data[i].country);
+        lifeExpectancy.push(data[i].total_life_expectancy);
+      }
+      return [xAxis, lifeExpectancy];
+    })
+    .then(chartData => drawLifeExpectancyBarChart('#life-expectancy-chart', chartData, country))
     .catch(catchErr);
   return false;
 });
