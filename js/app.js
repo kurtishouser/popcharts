@@ -544,7 +544,7 @@ function drawLifeExpectancyBarChart(domId, data, country) {
       columns: chartData,
       type: 'bar',
       color : function (color, d) {
-          return d.index && d.index === selectedCountryIndex ? "#dd0" : color;
+          return d.index === selectedCountryIndex ? "#dd0" : color;
       }
     },
     axis: {
