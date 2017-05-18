@@ -238,8 +238,6 @@ const countries = [
 ];
 
 const regions = [
-  "China",
-  "India",
   "AFRICA",
   "ASIA",
   "Australia/New Zealand",
@@ -278,6 +276,19 @@ const regions = [
   "Western Europe",
   "Western Sahara",
   "World",
+];
+
+const countries_test = [
+  'Argentina',
+  'Austria',
+  'China',
+  'Estonia',
+  'Germany',
+  'Indonesia',
+  'Japan',
+  'Saudi Arabia',
+  'United States',
+  'Zimbabwe'
 ];
 
 /* --- uncomment these to start with populated graphs --- */
@@ -477,29 +488,49 @@ function drawCountryBarChart(domId, data) {
           multiline: false
         },
         height: 130
+      },
+      y: {
+        label: { // ADD
+          text: 'Population',
+          position: 'outer-middle'
+        }
       }
     },
     zoom: {
-      enabled: true
-    }
+      enabled: true,
+      rescale: true
+    },
+    // may add later
+    // subchart: {
+    //   show: true,
+    //   size: {
+    //     height: 20
+    //   },
+    //   axis: {
+    //     x: {
+    //       show: false
+    //     }
+    //   }
+    // }
   });
 
 }
 
 function drawLifeExpectancyBarChart(domId, data, country) {
-  // convert data to appropriate format for the chart
+  // generate separate arrays for the chart
   let xAxis = ['x'];
   let you = ['You'];
   let lifeExpectancy = ['Life Expectancy'];
-  data.forEach(item => {
-    xAxis.push(item.country);
-    if (item.country === country) {
-      you.push(item.total_life_expectancy);
-    } else {
-      you.push(0);
+
+  let selectedCountryIndex;
+  for (let i = 0; i < data.length; i++) {
+    xAxis.push(data[i].country);
+    lifeExpectancy.push(data[i].total_life_expectancy);
+    if (data[i].country === country) { // country selected by the user
+      selectedCountryIndex = i; // set index for changing color of country bar
     }
-    lifeExpectancy.push(item.total_life_expectancy);
-  });
+  }
+
   chartData = [xAxis, lifeExpectancy, you];
 
   // draw the chart
@@ -511,7 +542,10 @@ function drawLifeExpectancyBarChart(domId, data, country) {
     data: {
       x: 'x',
       columns: chartData,
-      type: 'bar'
+      type: 'bar',
+      color : function (color, d) {
+          return d.index && d.index === selectedCountryIndex ? "#dd0" : color;
+      }
     },
     axis: {
       x: {
@@ -524,7 +558,8 @@ function drawLifeExpectancyBarChart(domId, data, country) {
       }
     },
     zoom: {
-      enabled: true
+      enabled: true,
+      rescale: true
     }
   });
 }
