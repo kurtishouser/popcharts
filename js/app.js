@@ -381,7 +381,7 @@ function drawLineChart(domId, chartData, xAxisStartTick, xAxisLabel) {
       x: {
         label: {
           text: xAxisLabel,
-          position: 'outer-middle'
+          position: 'inner-left'
         },
         tick: {
           format: function (x) { return x + xAxisStartTick; },
@@ -390,7 +390,7 @@ function drawLineChart(domId, chartData, xAxisStartTick, xAxisLabel) {
       y: {
         label: {
           text: 'Population',
-          position: 'inner-right'
+          position: 'outer-middle'
         }
       }
     },
@@ -475,6 +475,12 @@ function drawLifeExpectancyBarChart(domId, data, country) {
           multiline: false
         },
         height: 130
+      },
+      y: {
+        label: {
+          text: 'Years',
+          position: 'inner-top'
+        }
       }
     },
     zoom: {
@@ -484,11 +490,15 @@ function drawLifeExpectancyBarChart(domId, data, country) {
   });
 }
 
+function loading(domId) {
+  $(domId).append('<img class="ajax-loader" style="width: 50px;" src="images/world.gif">');
+}
 
 /* ----- FORM SUBMISSION - move to separate file ----- */
 $("#age-chart-form").on("submit", function() {
   let year = $('#age-chart-year').val();
   let country = $('#age-chart-country').val();
+  loading('#age-chart');
   getPopulationByYearAndCountry(year, country)
     .then(populationData => {
         let columnValues = [];
@@ -515,6 +525,7 @@ $("#age-chart-form").on("submit", function() {
 $("#year-chart-form").on("submit", function() {
   let age = $('#year-chart-age').val();
   let country = $('#year-chart-country').val();
+  loading('#year-chart');
   getPopulationByAgeGroupAndCountry(age, country)
     .then(populationData => {
         let columnValues = [];
@@ -542,6 +553,7 @@ $("#year-chart-form").on("submit", function() {
 $("#country-chart-form").on("submit", function() {
   let age = $('#country-chart-age').val();
   let year = $('#country-chart-year').val();
+  loading('#country-chart');
   getPopulationByAgeGroupAndYear(age, year)
     .then(populationData => {
       return populationData.filter(element => !regions.includes(element.country)) // countries only, exclude regions data
@@ -571,6 +583,7 @@ $("#life-expectancy-chart-form").on("submit", function() {
   let year = $('#life-expectancy-chart-year').val();
   let country = $('#life-expectancy-chart-country').val();
   let dob = year + '-' + month + '-' + day;
+  loading('#life-expectancy-chart');
   getTotalLifeExpectancyAllCountries(sex, country, dob)
     .then(data => {
       // generate separate arrays for the chart

@@ -1,6 +1,59 @@
+.uk-navbar-container.uk-navbar {
+  background-color: #7b1fa2;
+}
+.uk-navbar-item.uk-logo {
+  font-size: 3em;
+  color: #efefef;
+}
+#world {
+  width: 45px;
+}
+
 .uk-card-title {
   font-size: 1.25em;
 }
+.chart-content {
+  background-color: #fefffe;
+  border: 1px solid #efefef;
+  /*background-image: url("../images/graph-placeholder.jpg");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 100%;*/
+}
+#age-chart,
+#year-chart {
+  height: 320px
+}
+#country-chart,
+#life-expectancy-chart {
+  height: 400px;
+}
 .chart-content img {
   width: 100%;
+}
+footer {
+  background-color: #7b1fa2;
+  color: #efefef;
+  font-size: 1.25em;
+}
+footer a {
+  color: #efefef;
+}
+footer a:hover {
+  color: #efefef;
+  text-decoration: none;
+}
+
+.ajax-loader {
+  z-index: 1000;
+  position: absolute;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  margin: auto;
+}
+img .ajax-loader {
+  width: 50px;
+  height: 50px;
 }
