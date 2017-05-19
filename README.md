@@ -2,7 +2,7 @@
 
 Exploring world population data with charts.
 
-[World.io.ly](worldioly.surge.sh) is my Q1 Project for the [Web Development Immersive](http://www.galvanize.com/san-francisco/web-development) at [Galvanize - San Francisco](http://www.galvanize.com/san-francisco).
+[World.io.ly](http://worldioly.surge.sh/) is my Q1 Project for the [Web Development Immersive](http://www.galvanize.com/san-francisco/web-development) at [Galvanize - San Francisco](http://www.galvanize.com/san-francisco).
 
 Utilizing the [World Population API](http://api.population.io/), World.io.ly displays the data as set of graphs (described below) using the [C3](http://c3js.org/) visualization library.
 
