@@ -47,7 +47,7 @@ function logAndContinue(value) {
   return value;
 }
 
-/* ----- PRESENTATIONAL - move to separate file ----- */
+/* ----- PRESENTATIONAL ----- */
 function drawLineChart(domId, chartData, xAxisStartTick, xAxisLabel) {
   c3.generate({
     bindto: domId,
@@ -172,7 +172,7 @@ function loading(domId) {
   $(domId).append('<img class="ajax-loader" style="width: 50px;" src="images/world.gif">');
 }
 
-/* ----- FORM SUBMISSION - move to separate file ----- */
+/* ----- FORM SUBMISSION ----- */
 $("#age-chart-form").on("submit", function() {
   let year = $('#age-chart-year').val();
   let country = $('#age-chart-country').val();
