@@ -3,7 +3,7 @@
 
 <head>
   <meta charset="utf-8">
-  <title>World.io.ly</title>
+  <title>PopCharts - World Population Charts</title>
 
   <!-- Load CSS -->
   <link rel="stylesheet" href="css/uikit.min.css">
@@ -23,7 +23,7 @@
 <header>
   <nav class="uk-navbar-container" uk-navbar>
     <div class="uk-navbar-left">
-      <a href="index.html" class="uk-navbar-item uk-logo">World.io.ly</a>
+      <a href="index.html" class="uk-navbar-item uk-logo">P<span><img id="world" src="images/world.gif"></span>pCharts</a>
     </div>
   </nav>
 </header>
@@ -33,16 +33,14 @@
 
     <div class="uk-container uk-container-medium">
 
-      <h1 class="uk-heading-primary">W<span><img id="world" src="images/world.gif"></span>rld Population Charts</h1>
+      <h1 class="uk-heading-primary">World Population Charts</h1>
 
       <div class="uk-grid-small" uk-grid>
 
         <div class="uk-width-1-2@m">
           <div class="uk-card uk-card-default uk-card-body uk-card-hover uk-margin-bottom">
             <h3 class="uk-card-title">By age for a given year and country / region</h3>
-            <div id="age-chart" class="chart-content">
-              <!-- <div><img class="ajax-loader" style="width: 50px;" src="images/world.gif"></div> -->
-            </div>
+            <div id="age-chart" class="chart-content"></div>
             <form id="age-chart-form" class="uk-margin">
               <select id="age-chart-year" name="year" class="uk-select uk-form-width-xsmall uk-form-small" required>
                 <option>1950</option>
@@ -310,9 +308,7 @@
         <div class="uk-width-1-2@m">
           <div class="uk-card uk-card-default uk-card-body uk-card-hover uk-margin-bottom">
             <h3 class="uk-card-title">By year for a given age group and country / region</h3>
-            <div id="year-chart" class="chart-content">
-              <!-- <img class="ajax-loader" style="width: 50px;" src="images/world.gif"> -->
-            </div>
+            <div id="year-chart" class="chart-content"></div>
             <form id="year-chart-form" class="uk-margin">
               <select id="year-chart-age" name="age" class="uk-select uk-form-width-xsmall uk-form-small" required>
                 <option>0</option>
@@ -585,9 +581,7 @@
         <div class="uk-width-1-1">
           <div class="uk-card uk-card-default uk-card-body uk-card-hover uk-margin-bottom">
             <h3 class="uk-card-title">By country / region for a given age group and year</h3>
-            <div id="country-chart" class="chart-content">
-              <!-- <img class="ajax-loader" style="width: 50px;" src="images/world.gif"> -->
-            </div>
+            <div id="country-chart" class="chart-content"></div>
             <form id="country-chart-form" class="uk-margin">
               <select id="country-chart-age" name="age" class="uk-select uk-form-width-xsmall uk-form-small" required>
                 <option>0</option>
@@ -639,7 +633,6 @@
           <div class="uk-card uk-card-default uk-card-body uk-card-hover uk-margin-bottom">
             <h3 class="uk-card-title">Life expectancy by country</h3>
             <div id="life-expectancy-chart" class="chart-content">
-              <!-- <div><img class="ajax-loader" style="width: 50px;" src="images/world.gif"></div> -->
             </div>
             <form id="life-expectancy-chart-form" class="uk-margin">
               <label><input class="uk-radio" type="radio" name="sex" value="male" checked>Male</label>
@@ -915,14 +908,6 @@
                 <option>Vietnam</option>
                 <option>Zambia</option>
                 <option>Zimbabwe</option>
-                <!-- <option disabled="true">Regions...</option>
-                <option>AFRICA</option>
-                <option>ASIA</option>
-                <option>Central America</option>
-                <option>EUROPE</option>
-                <option>NORTHERN AMERICA</option>
-                <option>OCEANIA</option>
-                <option>World</option> -->
               </select>
               <button class="uk-button uk-button-small uk-button-primary" type="submit">Update</button>
             </form>
@@ -943,7 +928,7 @@
       <div class="uk-grid-small uk-child-width-expand@s" uk-grid>
         <div>
           <div class="uk-text-left">
-            World.io.ly
+            PopCharts
           </div>
         </div>
         <div>

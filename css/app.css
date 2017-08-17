@@ -6,19 +6,17 @@
   color: #efefef;
 }
 #world {
-  width: 45px;
+  width: 35px;
 }
-
+.uk-heading-primary {
+  font-size: 2.5em;
+}
 .uk-card-title {
   font-size: 1.25em;
 }
 .chart-content {
   background-color: #fefffe;
   border: 1px solid #efefef;
-  /*background-image: url("../images/graph-placeholder.jpg");
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: 100%;*/
 }
 #age-chart,
 #year-chart {

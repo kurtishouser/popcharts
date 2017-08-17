@@ -1,6 +1,5 @@
 const countries = [
   "Afghanistan",
-  // "AFRICA",
   "Albania",
   "Algeria",
   "Angola",
@@ -9,12 +8,9 @@ const countries = [
   "Argentina",
   "Armenia",
   "Aruba",
-  // "ASIA",
   "Australia",
-  // "Australia/New Zealand",
   "Austria",
   "Azerbaijan",
-  // "The Bahamas",
   "Bahrain",
   "Bangladesh",
   "Barbados",
@@ -36,10 +32,7 @@ const countries = [
   "Cambodia",
   "Cameroon",
   "Canada",
-  // "Caribbean",
   "Central African Republic",
-  // "Central America",
-  // "Central Asia",
   "Chad",
   "Channel Islands",
   "Chile",
@@ -60,16 +53,12 @@ const countries = [
   "Denmark",
   "Djibouti",
   "Dominican Republic",
-  // "Eastern Africa",
-  // "Eastern Asia",
-  // "Eastern Europe",
   "Ecuador",
   "El Salvador",
   "Equatorial Guinea",
   "Eritrea",
   "Estonia",
   "Ethiopia",
-  // "EUROPE",
   "Federated States of Micronesia",
   "Fiji",
   "Finland",
@@ -110,14 +99,9 @@ const countries = [
   "Kuwait",
   "Kyrgyz Republic",
   "Lao PDR",
-  // "LATIN AMERICA AND THE CARIBBEAN",
   "Latvia",
-  // "Least developed countries",
   "Lebanon",
   "Lesotho",
-  // "Less developed regions",
-  // "Less developed regions, excluding China",
-  // "Less developed regions, excluding least developed countries",
   "Liberia",
   "Libya",
   "Lithuania",
@@ -132,14 +116,10 @@ const countries = [
   "Mauritania",
   "Mauritius",
   "Mayotte",
-  // "Melanesia",
   "Mexico",
-  // "Micronesia",
-  // "Middle Africa",
   "Moldova",
   "Mongolia",
   "Montenegro",
-  // "More developed regions",
   "Morocco",
   "Mozambique",
   "Myanmar",
@@ -151,13 +131,8 @@ const countries = [
   "Nicaragua",
   "Niger",
   "Nigeria",
-  // "Northern Africa",
-  // "NORTHERN AMERICA",
-  // "Northern Europe",
   "Norway",
-  // "OCEANIA",
   "Oman",
-  // "Other non-specified areas",
   "Pakistan",
   "Panama",
   "Papua New Guinea",
@@ -165,7 +140,6 @@ const countries = [
   "Peru",
   "Philippines",
   "Poland",
-  // "Polynesia",
   "Portugal",
   "Puerto Rico",
   "Qatar",
@@ -191,17 +165,10 @@ const countries = [
   "Solomon Islands",
   "Somalia",
   "South Africa",
-  // "South America",
   "South Sudan",
-  // "South-Central Asia",
-  // "South-Eastern Asia",
-  // "Southern Africa",
-  // "Southern Asia",
-  // "Southern Europe",
   "Spain",
   "Sri Lanka",
   "West Bank and Gaza",
-  // "Sub-Saharan Africa",
   "Sudan",
   "Suriname",
   "Swaziland",
@@ -228,11 +195,6 @@ const countries = [
   "Uzbekistan",
   "Vanuatu",
   "Vietnam",
-  // "Western Africa",
-  // "Western Asia",
-  // "Western Europe",
-  // "Western Sahara",
-  // "World",
   "Zambia",
   "Zimbabwe"
 ];
@@ -278,24 +240,6 @@ const regions = [
   "World",
 ];
 
-// subset for testing Promise.all()
-// const countries_test = [
-//   'Argentina',
-//   'Austria',
-//   'China',
-//   'Estonia',
-//   'Germany',
-//   'Indonesia',
-//   'Japan',
-//   'Saudi Arabia',
-//   'United States',
-//   'Zimbabwe'
-// ];
-
-// uncomment to prepopulate charts after page loads
-// prePopulateCharts();
-
-
 // Retrieve population tables for a given year and country
 function getPopulationByYearAndCountry(year, country) {
   let url = `http://api.population.io:80/1.0/population/${year}/${country}/`;
@@ -317,8 +261,9 @@ function getPopulationByAgeGroupAndYear(age, year) {
 // Calculate total life expectancy - all countries
 function getTotalLifeExpectancyAllCountries(sex, country, dob) {
   let url = `http://api.population.io/1.0/life-expectancy/total/`;
-  let lifeExpectancyRequests = countries.map(country => fetch(`${url}${sex}/${country}/${dob}/`))
+  let lifeExpectancyRequests = countries.map(country => fetch(`${url}${sex}/${country}/${dob}/`));
   return Promise.all(lifeExpectancyRequests)
+  .then(logAndContinue)
   .then(lifeExpectancyResponses => {
     let lifeExpectancyPromises = lifeExpectancyResponses.map(lifeExpectancyResponse => lifeExpectancyResponse.json()); // array of promises
     return Promise.all(lifeExpectancyPromises)
@@ -330,12 +275,6 @@ function getTotalLifeExpectancyAllCountries(sex, country, dob) {
   })
 }
 
-// NOT USED (yet) - Calculate total life expectancy - individual country
-// function getTotalLifeExpectancyIndividual(sex, country, dob) {
-//   let url = `http://api.population.io/1.0/life-expectancy/total/${sex}/${country}/${dob}/`
-//   return getJsonFromFetch(url)
-// }
-
 function getJsonFromFetch(url) {
   return fetch(url)
     .then(response => response.json());
@@ -345,29 +284,10 @@ function catchErr(err) {
   throw new Error(err);
 }
 
-// function logAndContinue(value) {
-//   console.log(value); // eslint-disable-line
-//   return value;
-// }
-
-// optionally prepopulate all charts, useful for startup
-// function prePopulateCharts() {
-//   getPopulationByYearAndCountry(2010, 'United States')
-//     .then(populationData => drawLineChart('#year-chart', populationData, 0))
-//     .catch(catchErr);
-//
-//   getPopulationByAgeGroupAndCountry(25, 'United States')
-//     .then(populationData => drawLineChart('#age-chart', populationData, 1950))
-//     .catch(catchErr);
-//
-//   getPopulationByAgeGroupAndYear(30, 2015)
-//     .then(populationData => drawCountryBarChart('#country-chart', populationData))
-//     .catch(catchErr);
-//
-//   getTotalLifeExpectancyAllCountries('male', 'United States', '2000-01-01')
-//     .then(totalLifeExpectancy => drawLifeExpectancyBarChart('#life-expectancy-chart', totalLifeExpectancy, 'United States'))
-// }
-
+function logAndContinue(value) {
+  console.log(value); // eslint-disable-line
+  return value;
+}
 
 /* ----- PRESENTATIONAL - move to separate file ----- */
 function drawLineChart(domId, chartData, xAxisStartTick, xAxisLabel) {
@@ -562,12 +482,10 @@ $("#country-chart-form").on("submit", function() {
       let xAxis = ['x'];
       let males = ['Male'];
       let females = ['Female'];
-      // let total = ['Total'];
       chartData.forEach(item => {
         xAxis.push(item.country);
         males.push(item.males);
         females.push(item.females);
-        // total.push(item.total);
       });
       return [xAxis, males, females];
     })
