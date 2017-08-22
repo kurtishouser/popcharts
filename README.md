@@ -2,7 +2,7 @@
 
 Exploring world population data with charts.
 
-[PopCharts](http://www.popcharts.com/) is my Q1 Project for the [Web Development Immersive](http://www.galvanize.com/san-francisco/web-development) at [Galvanize - San Francisco](http://www.galvanize.com/san-francisco).
+[PopCharts](http://www.popcharts.xyz/) is my Q1 Project for the [Web Development Immersive](http://www.galvanize.com/san-francisco/web-development) at [Galvanize - San Francisco](http://www.galvanize.com/san-francisco).
 
 Utilizing the [World Population API](http://api.population.io/), PopCharts displays the data as set of graphs (described below) using the [C3](http://c3js.org/) visualization library.
 
