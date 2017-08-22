@@ -1,10 +1,10 @@
-# World.io.ly
+# PopCharts
 
 Exploring world population data with charts.
 
-[World.io.ly](http://worldioly.surge.sh/) is my Q1 Project for the [Web Development Immersive](http://www.galvanize.com/san-francisco/web-development) at [Galvanize - San Francisco](http://www.galvanize.com/san-francisco).
+[PopCharts](http://www.popcharts.com/) is my Q1 Project for the [Web Development Immersive](http://www.galvanize.com/san-francisco/web-development) at [Galvanize - San Francisco](http://www.galvanize.com/san-francisco).
 
-Utilizing the [World Population API](http://api.population.io/), World.io.ly displays the data as set of graphs (described below) using the [C3](http://c3js.org/) visualization library.
+Utilizing the [World Population API](http://api.population.io/), PopCharts displays the data as set of graphs (described below) using the [C3](http://c3js.org/) visualization library.
 
 ## The Charts
 
